@@ -44,6 +44,7 @@ impl LocalEnv {
     /// Merges two local envs together. This is useful in cases such as if statements
     /// where different LocalEnv's can be created, and the result is decided at runtime.
     /// The compile-time type must be the union of the options.
+    #[cfg(feature = "expr-if_statement")]
     pub(crate) fn merge(mut self, other: Self) -> Self {
         for (ident, other_details) in other.bindings {
             if let Some(self_details) = self.bindings.get_mut(&ident) {

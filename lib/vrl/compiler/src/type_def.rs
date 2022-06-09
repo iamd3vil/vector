@@ -388,6 +388,7 @@ pub(crate) struct Details {
 
 impl Details {
     /// Returns the union of 2 possible states
+    #[cfg(any(test, feature = "expr-if_statement"))]
     pub(crate) fn merge(self, other: Self) -> Self {
         Self {
             type_def: self.type_def.merge_deep(other.type_def),
@@ -399,6 +400,8 @@ impl Details {
         }
     }
 
+    /// Returns the union of 2 possible states
+    #[cfg(any(feature = "expr-if_statement"))]
     pub(crate) fn merge_optional(
         a: Option<Self>,
         b: Option<Self>,

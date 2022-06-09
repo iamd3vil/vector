@@ -2,12 +2,11 @@ use diagnostic::{DiagnosticList, DiagnosticMessage, Severity, Span};
 use lookup::LookupBuf;
 use parser::ast::{self, Node};
 
-use crate::type_def::Details;
 use crate::{
     expression::*,
     program::ProgramInfo,
     state::{ExternalEnv, LocalEnv},
-    Function, Program, TypeDef,
+    Function, Program,
 };
 
 pub(crate) type Diagnostics = Vec<Box<dyn DiagnosticMessage>>;
@@ -267,6 +266,8 @@ impl<'a> Compiler<'a> {
         node: Node<ast::IfStatement>,
         external: &mut ExternalEnv,
     ) -> IfStatement {
+        use crate::type_def::{Details, TypeDef};
+
         let ast::IfStatement {
             predicate,
             consequent,
